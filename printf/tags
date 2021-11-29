@@ -7,7 +7,9 @@ ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/
 ft_calclenght	libft/ft_atoi.c	/^static long long	ft_calclenght(const char *str)$/
 ft_calloc	libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/
-ft_charexist	libft/ft_strtrim.c	/^static int	ft_charexist(char c, char const *set)$/
+ft_char_repeat	utils/ft_putnbr_base.c	/^int	ft_char_repeat(char *str1, char *str2)$/
+ft_charexist	libftprintf.c	/^static int	ft_charexist(char c, char const *set)$/
+ft_check_base	utils/ft_putnbr_base.c	/^int	ft_check_base(char *base)$/
 ft_isalnum	libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/
 ft_isalpha	libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/
 ft_isascii	libft/ft_isascii.c	/^int	ft_isascii(int c)$/
@@ -34,6 +36,7 @@ ft_memset	libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/
 ft_printf	libftprintf.c	/^int ft_printf(const char *s, ...)$/
 ft_putchar_fd	libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/
 ft_putendl_fd	libft/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/
+ft_putnbr_base	utils/ft_putnbr_base.c	/^void	ft_putnbr_base(int nbr, char *base)$/
 ft_putnbr_fd	libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/
 ft_putstr_fd	libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/
 ft_split	libft/ft_split.c	/^char	**ft_split(char const *s, char c)$/
@@ -52,3 +55,4 @@ ft_strtrim	libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s, char const *set)
 ft_substr	libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start,/
 ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/
 ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/
+print_type	libftprintf.c	/^void print_type (char type, va_list arg)$/
