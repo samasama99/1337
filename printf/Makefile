@@ -1,32 +1,34 @@
 NAME	=	libftprintf.a
 
-SRCS	=	libftprintf.c utils/*.c
+FUNCTION = ft_printf.c
 
-OBJS	=	${SRCS:.c:.o}
+SRCS	=	utils/ft_putchar_fd.c \
+			utils/ft_putnbr_base.c \
+			utils/ft_putnbr_fd.c \
+			utils/ft_putstr_fd.c \
+			utils/ft_strlen.c	
 
-INCL	=	*/*.h
+OBJS	=	*.o
+
+INCL	=	includes/ft_printf.h
 
 CC		=	gcc
 
-FLAGS	=	-Wall -Wextra -Werror
-
-LIBFT_PATH	=	libft
-
-LIBFT_LIB	=	libft/libft.a
+FLAGS	=	-Wall -Wextra -Werror -c
 
 all : ${NAME}
 
-${NAME} : ${OBJS} ${LIBFT_LIB} ${INCL}
+${NAME} : ${OBJS} ${INCL}
 	ar rcs $@ $^
 
-${LIBFT_LIB} : 
-	cd ${LIBFT_PATH} && Make && make clean && cd ..
+${OBJS}	: ${FUNCTION} ${SRCS}
+	${CC} ${FLAGS} ${FUNCTION} ${SRCS}
 
 clean :
-	rm *.o */*.o
+	rm -f *.o
 
 fclean : clean
-	rm ${NAME}
+	rm -f ${NAME}
 
 re : fclean all
 	

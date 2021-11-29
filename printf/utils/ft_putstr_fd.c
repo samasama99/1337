@@ -6,10 +6,10 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 14:33:32 by orahmoun          #+#    #+#             */
-/*   Updated: 2021/11/19 14:39:50 by orahmoun         ###   ########.fr       */
+/*   Updated: 2021/11/29 20:03:59 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../includes/ft_printf.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
