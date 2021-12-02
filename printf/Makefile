@@ -8,7 +8,9 @@ SRCS	=	utils/ft_putchar_fd.c \
 			utils/ft_putstr_fd.c \
 			utils/ft_strlen.c	
 
-OBJS	=	*.o
+OBJS	=	${SRCS:utils/%.c=%.o}
+
+OBJS_FUN	=	${FUNCTION:.c=.o}
 
 INCL	=	includes/ft_printf.h
 
@@ -18,11 +20,14 @@ FLAGS	=	-Wall -Wextra -Werror -c
 
 all : ${NAME}
 
-${NAME} : ${OBJS} ${INCL}
+${NAME} : ${INCL} ${OBJS_FUN} ${OBJS} 
 	ar rcs $@ $^
 
-${OBJS}	: ${FUNCTION} ${SRCS}
-	${CC} ${FLAGS} ${FUNCTION} ${SRCS}
+${OBJS}	: ${SRCS}
+	${CC} ${FLAGS} ${SRCS}
+
+${OBJS_FUN}	: ${FUNCTION}
+	${CC} ${FLAGS} ${FUNCTION}
 
 clean :
 	rm -f *.o

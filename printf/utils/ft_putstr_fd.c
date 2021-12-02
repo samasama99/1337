@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 14:33:32 by orahmoun          #+#    #+#             */
-/*   Updated: 2021/12/01 21:29:06 by orahmoun         ###   ########.fr       */
+/*   Updated: 2021/12/02 18:19:34 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/ft_printf.h"
@@ -18,7 +18,7 @@ int	ft_putstr_fd(char *s, int fd)
 	i = 0;
 	if (!s)
 	{
-		return ft_putstr_fd("(null)" ,fd);
+		return (ft_putstr_fd ("(null)", fd));
 	}
 	if (s != NULL)
 	{
@@ -26,5 +26,5 @@ int	ft_putstr_fd(char *s, int fd)
 			i++;
 		write (fd, s, i);
 	}
-	return ft_strlen(s);
+	return (ft_strlen(s));
 }
