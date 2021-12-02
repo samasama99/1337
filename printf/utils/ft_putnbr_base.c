@@ -6,36 +6,69 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 15:12:52 by orahmoun          #+#    #+#             */
-/*   Updated: 2021/11/29 22:15:51 by orahmoun         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:34:15 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/ft_printf.h"
 
-void	ft_putnbr_base(int nbr, char *base, len)
+static int	hex_len(unsigned int x)
 {
-	long int	nb;
-	static int	len;
+	int len;
+
+	len = 0;
+	if (!x)
+		return 1;
+	while (x)
+	{
+		x = x / 16;
+		len++;
+	}
+	return len++;
+}
+
+static int	hex_len_long(unsigned long x)
+{
+	int len;
+
+	len = 0;
+	if (!x)
+		return 1;
+	while (x)
+	{
+		x = x / 16;
+		len++;
+	}
+	return len++;
+}
+
+int	ft_putnbr_base(unsigned int nbr, char *base)
+{
+	unsigned int	nb;
 	
 	nb = nbr;
-	nb++;
-	if (nb < 0)
-	{
-		write (1, "-", 1);
-		nb *= -1;
-	}
 	if (nb / 16 != 0)
 		ft_putnbr_base (nb / 16, base);
 	write(1, &base[nb % 16], 1);
-	return nb;
+	return hex_len(nbr);
 }
-void	ft_putnbr_base_ul(unsigned long nbr, char *base)
+
+int	ft_putnbr_base_long(unsigned long nbr, char *base)
 {
-	unsigned long 	nb;
-	static int	len;
-	len++;
+	unsigned long	nb;
+	
 	nb = nbr;
 	if (nb / 16 != 0)
-		ft_putnbr_base_ul (nb / 16, base);
+		ft_putnbr_base_long (nb / 16, base);
 	write(1, &base[nb % 16], 1);
-	return len;
+	return hex_len_long(nbr);
 }
+/*
+#include <stdio.h>
+int main()
+{
+	printf("%d\n", hex_len(255));
+
+	printf(" --- %d\n", ft_putnbr_base(-255, "0123456789abcdef"));
+	printf(" --- %d", printf ("%x", -255));
+}
+*/
