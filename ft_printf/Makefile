@@ -20,7 +20,7 @@ FLAGS	=	-Wall -Wextra -Werror -c
 
 all : ${NAME}
 
-${NAME} : ${INCL} ${OBJS_FUN} ${OBJS} 
+${NAME} : ${OBJS_FUN} ${OBJS} ${INCL}
 	ar rcs $@ $^
 
 ${OBJS}	: ${SRCS}
@@ -30,7 +30,7 @@ ${OBJS_FUN}	: ${FUNCTION}
 	${CC} ${FLAGS} ${FUNCTION}
 
 clean :
-	rm -f *.o
+	rm -f ${OBJS} ${OBJS_FUN}
 
 fclean : clean
 	rm -f ${NAME}

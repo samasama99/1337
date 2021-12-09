@@ -6,10 +6,9 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 10:04:19 by orahmoun          #+#    #+#             */
-/*   Updated: 2021/12/02 18:25:28 by orahmoun         ###   ########.fr       */
+/*   Updated: 2021/12/02 19:00:54 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 #include "includes/ft_printf.h"
 
 static int	ft_charexist(char c, char const *set)
@@ -36,7 +35,7 @@ int	print_type(char type, va_list arg)
 	if (type == 'd' || type == 'i')
 		return (ft_putnbr_fd(va_arg(arg, int), 1));
 	else if (type == 'u')
-		return (ft_putnbr_u_fd ((unsigned int)va_arg(arg, unsigned int), 1));
+		return (ft_putnbr_u_fd (va_arg(arg, unsigned int), 1));
 	else if (type == 's')
 		return (ft_putstr_fd (va_arg(arg, char *), 1));
 	else if (type == 'c')
