@@ -18,7 +18,7 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror -c
 
-all : $(NAME)
+all : ${NAME}
 
 ${NAME} : ${OBJS_FUN} ${OBJS} ${INCL}
 	ar rcs $@ $^
@@ -28,8 +28,6 @@ ${OBJS}	: ${SRCS}
 
 ${OBJS_FUN}	: ${FUNCTION}
 	${CC} ${FLAGS} ${FUNCTION}
-
-
 
 clean :
 	rm -f ${OBJS} ${OBJS_FUN}
