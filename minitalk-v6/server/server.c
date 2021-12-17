@@ -4,24 +4,35 @@
 void handler(int sig)
 {
     static int      index;
-    static char     c;
+    static char     c[2];
+    static char     *str;
 
     if(sig == SIGUSR2)
     {
-        c = c << 1;
+        c[0] = c[0] << 1;
         index++;
     }
     else
     {
-        c = c << 1;
-        c = c | 1;
+        c[0] = c[0] << 1;
+        c[0] = c[0] | 1;
         index++;
     }
+    c[1] = 0;
     if (index == 8)
     {
-        write(1, &c, 1);
+        if (str == 0)
+            str = ft_strdup("");
+        str = ft_strjoin(str, c);
+        if (c[0] == 0)
+        {
+            ft_putstr_fd(str, 1);
+            ft_putstr_fd("\n -- end of the msg\n", 1);
+            free(str);
+            str = NULL;
+        }
         index = 0;
-        c = 0;
+        c[0] = 0;
     }
     
 

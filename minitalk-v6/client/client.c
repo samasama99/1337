@@ -8,7 +8,7 @@ int main(int n, char **args)
     int server_pid = ft_atoi(args[1]);
     int i = 0;
 
-    while (args[2][i])
+    while (i < (ft_strlen(args[2]) + 1))
     {
         c = args[2][i];
         while(x)
@@ -18,7 +18,7 @@ int main(int n, char **args)
                 kill(server_pid, SIGUSR1);
             else
                 kill(server_pid, SIGUSR2);
-            usleep(500);
+            usleep(100);
         }
         x = 8;
         i++;
