@@ -1,0 +1,2 @@
+int *ft_dec_to_binary(int decimal, int size);
+	example : take 65 (== 1000001) nd 8 return {0,1,0,0,0,0,0,1}
