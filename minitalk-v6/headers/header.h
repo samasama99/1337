@@ -12,3 +12,5 @@ int ft_atoi(const char *str);
 void    ft_putstr_fd(char *s, int fd);
 void    ft_putnbr_fd(int n, int fd);
 void    ft_putchar_fd(char c, int fd);
+char	*ft_append_char(char *s, char c);
+char	*ft_init_null(void);

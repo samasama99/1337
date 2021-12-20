@@ -1,7 +1,13 @@
 #include "../headers/header.h"
 int sending_msg;
-void handler(int sig){
-    sending_msg = 0;
+
+static void handler(int sig){
+	/* static int	count; */
+
+	if (sig == SIGUSR2)
+    	sending_msg = 0;
+	/* else */
+	/* 	count++; */
 }
 
 int main(int n, char **args)
@@ -12,7 +18,8 @@ int main(int n, char **args)
     int i = 0;
     sending_msg = 1;
 
-    signal(SIGUSR1, handler);
+    /* signal(SIGUSR1, handler); */
+    signal(SIGUSR2, handler);
     while (i < (ft_strlen(args[2]) + 1))
     {
         c = args[2][i];
@@ -23,7 +30,8 @@ int main(int n, char **args)
                 kill(server_pid, SIGUSR1);
             else
                 kill(server_pid, SIGUSR2);
-            /* usleep(100); */
+            usleep(342);
+			/* pause(); */
         }
         x = 8;
         i++;

@@ -1,30 +1,20 @@
 #include "../headers/header.h"
 
-
-void receive_binary_handler(int sig, siginfo_t *info, void *context)
+static void receive_binary_handler(int sig, siginfo_t *info, void *context)
 {
     static int      index;
-    static char     c[2];
+    static char     c;
     static char     *str;
 
-    if(sig == SIGUSR2)
-    {
-        c[0] = c[0] << 1;
-        index++;
-    }
-    else
-    {
-        c[0] = c[0] << 1;
-        c[0] = c[0] | 1;
-        index++;
-    }
-    c[1] = 0;
-    if (index == 8)
+    c = c << 1;
+    if(sig == SIGUSR1)
+        c = c | 1;
+    if (++index == 8)
     {
         if (str == 0)
-            str = ft_strdup("");
-        str = ft_strjoin(str, c);
-        if (c[0] == 0)
+            str = ft_init_null();
+        str = ft_append_char(str, c);
+        if (c == 0)
         {
             ft_putstr_fd(str, 1);
             ft_putstr_fd("\n -- msg was sent from : ", 1);
@@ -32,11 +22,13 @@ void receive_binary_handler(int sig, siginfo_t *info, void *context)
             ft_putchar_fd('\n', 1);
             free(str);
             str = NULL;
-            kill(info->si_pid, SIGUSR1);
+            kill(info->si_pid, SIGUSR2);
         }
         index = 0;
-        c[0] = 0;
+        c = 0;
     }
+	/* else */
+    	/* kill(info->si_pid, SIGUSR1); */
 }
 
 
