@@ -6,7 +6,7 @@
 #    By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/05 12:20:38 by orahmoun          #+#    #+#              #
-#    Updated: 2022/01/05 14:40:39 by orahmoun         ###   ########.fr        #
+#    Updated: 2022/01/07 22:00:42 by orahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,12 @@ MAKE_LIBFT = libft/
 
 SRC = vector.c \
 	  moves.c \
+	  moves2.c \
+	  sorting.c \
+	  is_sorted.c \
+	  sorting_utils.c \
+	  print_error.c \
+	  parse.c \
 	  moves_utils.c
 
 SRC_OBJ = ${SRC:%c=%o} 
@@ -40,8 +46,8 @@ ${LIBFT} :
 ${NAME} : ${NAME_OBJ} ${SRC_OBJ} ${LIBFT}
 	${CC} ${FLAGS} $^ -o ${NAME}
 
-debug : ${NAME_OBJ} ${SRC_OBJ} ${LIBFT}
-	${CC} ${FLAGS} -g $^ -o ${NAME}
+debug : ${NAME_SRC} ${SRC} 
+	${CC} ${FLAGS} -g $^ libft/*.c -o ${NAME}
 
 %.o : %.c ${HEADER}
 	${CC} ${FLAGS} -c $<

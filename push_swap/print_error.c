@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 22:12:22 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 22:00:23 by orahmoun         ###   ########.fr       */
+/*   Created: 2022/01/07 20:13:27 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/01/07 21:48:01 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(int n_args, char **args)
+void	print_err_exit(char *err, int err_len)
 {
-	t_stack		a;
-	t_stack		b;
-	t_stack		*tmp;
-	parse_check_error(&a, &b, args, n_args);
-	if (sort_a_sorted_array (&a) == -1)
+	write (STDERROR, err, err_len);
+	exit(1);
+}
+
+char	**dup_2d_strings_array(char **args, int n_elems)
+{
+	char	**new;
+	int		i;
+
+	i = 0;
+	new = (char **)malloc (sizeof(char *) * n_elems);
+	if (new == NULL)
+		print_err_exit (ERROR_MSG_5, ERR5_LEN);
+	while (i < n_elems)
 	{
-		tmp = longest_sequence(a);
-		push_non_sequence(&a, &b, *tmp);
-		sort_using_ls(&a, &b, 0, 0);
-		sort_a_sorted_array (&a);
+		new[i] = ft_strdup(args[i]);
+		i++;
 	}
+	return (new);
 }
