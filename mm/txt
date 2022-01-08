@@ -1,0 +1,5 @@
+/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/lib/ruby/2.3.0/universal-darwin18/rbconfig.rb:215: warning: Insecure world writable dir /Users/orahmoun in PATH, mode 040777
+-e:1:in `write': Broken pipe @ io_write - <STDOUT> (Errno::EPIPE)
+	from -e:1:in `puts'
+	from -e:1:in `puts'
+	from -e:1:in `<main>'
