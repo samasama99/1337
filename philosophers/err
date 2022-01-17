@@ -1,0 +1,10 @@
+main.c:26:53: warning: cast to 'void *' from smaller integer type 'int' [-Wint-to-void-pointer-cast]
+                rc = pthread_create(&thread_id, NULL, PrintHello, (void*)i);
+                                                                  ^
+main.c:29:60: warning: format specifies type 'unsigned int' but the argument has type 'pthread_t _Nonnull' (aka 'struct _opaque_pthread_t *') [-Wformat]
+                printf("\nI'm thread %u. Created new thread (%u) .. \n", pthread_self(), thread_id);
+                                     ~~                                  ^~~~~~~~~~~~~~
+main.c:29:76: warning: format specifies type 'unsigned int' but the argument has type 'pthread_t' (aka 'struct _opaque_pthread_t *') [-Wformat]
+                printf("\nI'm thread %u. Created new thread (%u) .. \n", pthread_self(), thread_id);
+                                                             ~~                          ^~~~~~~~~
+3 warnings generated.
