@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:17:34 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 18:35:20 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/01/09 04:47:52 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	swap_top(t_stack *s, bool print)
 		write_move_name ("s", s->name);
 }
 
-void	push_to(t_stack *src, t_stack *dst)
+void	push_to(t_stack *src, t_stack *dst, bool print)
 {
 	insert_element (dst, src->elements[0]);
 	rotate_reverse (dst, false);
 	delete_element (src, 0);
-	write_move_name ("p", dst->name);
+	if (print)
+		write_move_name ("p", dst->name);
 }
 
 void	rotate(t_stack *s, bool print)

@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:44:44 by orahmoun          #+#    #+#             */
-/*   Updated: 2021/11/19 14:34:17 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:54:40 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -33,7 +33,7 @@ static long long	ft_calclenght(const char *str)
 	return (x / 10);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	int					s;
 	unsigned int		i;

@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:17:47 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 21:48:04 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:41:24 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,73 +30,69 @@ int	sort_a_sorted_array(t_stack *s)
 	return (1);
 }
 
-static void	sort_using_ls_moves(t_stack *a, t_stack *b,
-			int *a_moves, int *b_moves)
+int	best_move(t_stack s, int index)
 {
-	int		index_min;
-	int		size;
-	int		*total_moves;
+	int		best_moves;
 
-	total_moves = (int *)malloc(b->n_elements * sizeof(int));
-	size = b->n_elements;
-	while (size--)
-	{
-		if (a_moves[size] > b_moves[size])
-			total_moves[size] = a_moves[size];
-		else
-			total_moves[size] = b_moves[size];
-	}
-	index_min = find_min (total_moves, b->n_elements);
-	while (a_moves[index_min] > 0 && b_moves[index_min] > 0)
-	{
-		a_moves[index_min]--;
-		b_moves[index_min]--;
-		rr(a, b);
-	}
-	while (a_moves[index_min] > 0)
-	{
-		a_moves[index_min]--;
-		rotate (a, true);
-	}
-	while (b_moves[index_min] > 0)
-	{
-		b_moves[index_min]--;
-		rotate (b, true);
-	}
-	push_to(b, a);
+	best_moves = 0;
+	if (index == 0)
+		return (0);
+	if (s.n_elements - index < index)
+		while (s.n_elements - index++)
+			best_moves++;
+	else
+		while (index--)
+			best_moves--;
+	return (best_moves);
 }
 
-void	sort_using_ls(t_stack *a, t_stack *b, int i, int j)
+void	start_sorting(t_stack *a, t_stack *b, int a_best, int b_best)
 {
-	int		min;
-	int		*a_moves;
-	int		*b_moves;
-
-	a_moves = (int *)malloc (b->n_elements * sizeof(int));
-	b_moves = (int *)malloc (b->n_elements * sizeof(int));
-	min = -1;
-	while (b->n_elements > 0)
+	while (min_int (absolute_value(a_best), absolute_value(b_best))
+		&& (a_best * b_best > 0))
 	{
-		while (i < b->n_elements)
+		if (a_best < 0)
 		{
-			while (j < a->n_elements)
-			{
-				if ((a->elements[j] - b->elements[i] < min
-						&& a->elements[j] - b->elements[i] > 0) || min < 0)
-				{
-					min = a->elements[j] - b->elements[i];
-					a_moves[i] = j;
-					b_moves[i] = i;
-				}
-				j++;
-			}
-			min = -1;
-			j = 0;
-			i++;
+			a_best++;
+			b_best++;
+			rr (a, b, true);
 		}
-		i = 0;
-		sort_using_ls_moves(a, b, a_moves, b_moves);
+		else
+		{
+			a_best--;
+			b_best--;
+			rrr (a, b, true);
+		}
 	}
-	free (a_moves);
-	free (b_moves);
+	do_moves (a, a_best);
+	do_moves (b, b_best);
+	push_to (b, a, true);
+}
+
+void	sort_using_ls(t_stack *a, t_stack *b, int index, int min)
+{
+	int		nearest;
+	int		a_best;
+	int		b_best;
+	int		current;
+
+	while (b->n_elements)
+	{
+		while (index < b->n_elements)
+		{
+			nearest = nearest_number(*a, b->elements[index]);
+			current = calc_moves (best_move (*a, nearest),
+					best_move (*b, index));
+			if (current < min || min == -1)
+			{
+				a_best = best_move (*a, nearest);
+				b_best = best_move (*b, index);
+				min = current;
+			}
+			index++;
+		}
+		index = 0;
+		min = -1;
+		start_sorting (a, b, a_best, b_best);
+	}
 }

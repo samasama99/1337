@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   extra_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 20:13:27 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 21:48:01 by orahmoun         ###   ########.fr       */
+/*   Created: 2022/01/08 21:04:37 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/01/11 15:54:03 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_err_exit(char *err, int err_len)
+void	free_parse(char **args, int n_elems)
 {
-	write (STDERROR, err, err_len);
-	exit(1);
+	while (n_elems)
+		free (args[--n_elems]);
+	free (args);
 }
 
-char	**dup_2d_strings_array(char **args, int n_elems)
+void	free_pair(t_stack a, t_stack b)
 {
-	char	**new;
-	int		i;
+	free (a.elements);
+	free (b.elements);
+	free (a.name);
+	free (b.name);
+}
 
-	i = 0;
-	new = (char **)malloc (sizeof(char *) * n_elems);
-	if (new == NULL)
-		print_err_exit (ERROR_MSG_5, ERR5_LEN);
-	while (i < n_elems)
-	{
-		new[i] = ft_strdup(args[i]);
-		i++;
-	}
-	return (new);
+void	free_single(t_stack *s)
+{
+	free (s->name);
+	free (s->elements);
+	free (s);
+}
+
+int	limit_error(long long x)
+{
+	if (x > INT_MAX || x < INT_MIN)
+		return (0);
+	return (1);
 }

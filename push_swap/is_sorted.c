@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:17:28 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 21:48:03 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/01/10 22:06:34 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,39 @@ int	find_min(int *array, int size)
 	return (min_index);
 }
 
-/* int	find_max(int *array, int size) */
-/* { */
-/* 	int			max; */
-/* 	int			max_index; */
-/* 	int			i; */
+int	find_max(int *array, int size)
+{
+	int		max;
+	int		index_max;
+	int		i;
 
-/* 	i = 1; */
-/* 	max = array[0]; */
-/* 	max_index = 0; */
-/* 	while (i < size) */
-/* 	{ */
-/* 		if (max < array[i]) */
-/* 		{ */
-/* 			max = array[i]; */
-/* 			max_index = i; */
-/* 		} */
-/* 		i++; */
-/* 	} */
-/* 	return (max_index); */
-/* } */
+	max = array[0];
+	index_max = 0;
+	i = 0;
+	while (i < size)
+	{
+		if (max < array[i])
+		{
+			max = array[i];
+			index_max = i;
+		}
+		i++;
+	}
+	return (index_max);
+}
 
 int	is_sorted(int *array, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < size - 2)
+	while (i < size - 1)
 	{
 		if (array[i] > array[i + 1])
-			return (false);
+			return (0);
 		i++;
 	}
-	return (true);
+	return (1);
 }
 
 int	is_sorted_circulary(int	*array, int size)
@@ -83,11 +83,3 @@ int	is_sorted_circulary(int	*array, int size)
 	}
 	return (min_index);
 }
-
-/* static void is_true(bool pr) */
-/* { */
-/* 	if (pr) */
-/* 		printf ("True  !\n"); */
-/* 	else */
-/* 		printf ("False !\n"); */
-/* } */

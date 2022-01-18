@@ -6,7 +6,7 @@
 #    By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/18 15:27:34 by orahmoun          #+#    #+#              #
-#    Updated: 2021/11/19 13:39:34 by orahmoun         ###   ########.fr        #
+#    Updated: 2022/01/10 22:33:15 by orahmoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 FLAGS	=	-Wall -Werror -Wextra
 
-CC	=	gcc
+CC	=	cc
 
 all	:	$(TARGET)
 

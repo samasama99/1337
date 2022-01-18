@@ -6,76 +6,55 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:17:21 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 18:36:30 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:59:21 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "header.h"
 
-t_stack	*longest_sequence_index(t_stack s, int index)
+int	nearest_number(t_stack s, int number)
 {
-	int			i;
-	t_stack		*seq;
+	int		index;
+	int		min_sub;
+	int		min_index;
+	int		current_sub;
 
-	i = (index + 1) % s.n_elements;
-	seq = (t_stack *)malloc(sizeof (t_stack));
-	init_vec (seq, "x");
-	insert_element(seq, s.elements[index]);
-	while ((i - index - 1) < s.n_elements)
+	min_sub = -1;
+	index = 0;
+	while (index < s.n_elements)
 	{
-		if (s.elements[(i % s.n_elements)] > seq->elements[seq->n_elements - 1])
-			insert_element (seq, s.elements[i % s.n_elements]);
-		i++;
-	}
-	return (seq);
-}
-
-static bool	in_sequence(int elem, int *array, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-		if (elem == array[i++])
-			return (true);
-	return (false);
-}
-
-void	push_non_sequence(t_stack *src, t_stack *dst, t_stack seq)
-{
-	int	i;
-	int	iteration;
-
-	iteration = src->n_elements;
-	i = 0;
-	while (i < iteration)
-	{
-		if (in_sequence(*(src->elements), seq.elements, seq.n_elements))
-			rotate (src, "true");
-		else
-			push_to(src, dst);
-		i++;
-	}
-}
-
-t_stack	*longest_sequence(t_stack s)
-{
-	t_stack		*tmp1;
-	t_stack		*tmp2;
-	int			len;
-	int			i;
-
-	i = 0;
-	len = 0;
-	while (i < s.n_elements)
-	{
-		tmp1 = longest_sequence_index (s, i);
-		if (tmp1->n_elements > len)
+		current_sub = s.elements[index] - number;
+		if ((current_sub < min_sub && current_sub > 0)
+			|| (current_sub > 0 && min_sub < 0))
 		{
-			len = tmp1->n_elements;
-			tmp2 = dup_vec(*tmp1);
+			min_sub = current_sub;
+			min_index = index;
 		}
-		i++;
+		index++;
 	}
-	return (tmp2);
+	return (min_index);
+}
+
+int	calc_moves(int a_best, int b_best)
+{
+	int		moves;
+
+	if (a_best * b_best < 0)
+		moves = absolute_value(a_best) + absolute_value(b_best);
+	else
+		moves = max_int (absolute_value(a_best), absolute_value(b_best));
+	return (moves);
+}
+
+void	do_moves(t_stack *s, int moves)
+{
+	while (moves < 0)
+	{
+		++moves;
+		rotate (s, true);
+	}
+	while (moves > 0)
+	{
+		--moves;
+		rotate_reverse (s, true);
+	}
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_utils.c                                    :+:      :+:    :+:   */
+/*   longest_sequence.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 18:17:21 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/01/07 18:36:30 by orahmoun         ###   ########.fr       */
+/*   Created: 2022/01/08 15:27:20 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/01/10 20:59:18 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-t_stack	*longest_sequence_index(t_stack s, int index)
+static t_stack	*longest_sequence_index(t_stack s, int index)
 {
 	int			i;
 	t_stack		*seq;
@@ -51,9 +51,9 @@ void	push_non_sequence(t_stack *src, t_stack *dst, t_stack seq)
 	while (i < iteration)
 	{
 		if (in_sequence(*(src->elements), seq.elements, seq.n_elements))
-			rotate (src, "true");
+			rotate (src, true);
 		else
-			push_to(src, dst);
+			push_to(src, dst, true);
 		i++;
 	}
 }
@@ -67,14 +67,19 @@ t_stack	*longest_sequence(t_stack s)
 
 	i = 0;
 	len = 0;
+	tmp2 = NULL;
 	while (i < s.n_elements)
 	{
 		tmp1 = longest_sequence_index (s, i);
 		if (tmp1->n_elements > len)
 		{
 			len = tmp1->n_elements;
-			tmp2 = dup_vec(*tmp1);
+			if (tmp2 != NULL)
+				free_single (tmp2);
+			tmp2 = tmp1;
 		}
+		else
+			free_single (tmp1);
 		i++;
 	}
 	return (tmp2);
