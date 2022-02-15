@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:01:42 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/15 10:30:20 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/15 10:37:29 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "main.h"
@@ -122,11 +122,11 @@ char	**spilt_with_sp_ignoring_external_quotes(char *str)
 				i++;
 				while (str[i] && str[i] != quote)
 					i++;
-				printf ("%zu %zu\n", j, i);
 			}
-			tmp = ft_substr(str, j, i - j);
+			i++;
 		}
-		splited_rd = split_and_join(splited_rd, tmp);
+		tmp = ft_substr(str, j, i - j);
+		splited_rd = add_element_2d_array_last(splited_rd, tmp);
 	}
 	return (splited_rd);
 }
@@ -143,19 +143,24 @@ int main()
 	while (1)
 	{
 		rd = readline("> ");
+		if (check_unclosed_quotes(rd) == true)
+		{
+			printf ("unclosed quotes\n");
+			continue ;
+		}
 		add_history(rd);
 		sp = spilt_with_sp_ignoring_external_quotes(rd);
-		print_2d_array(sp, 1);
-		/* while (sp[i]) */
-		/* { */
-		/* 	parsed = add_element_2d_array_last(parsed, join_2d_array_into_str(split_according_to_quotes(sp[i]))); */
-		/* 	i++; */
-		/* } */
-		/* print_2d_array(parsed, 1); */
+		/* print_2d_array(sp, 1); */
+		while (sp[i])
+		{
+			parsed = add_element_2d_array_last(parsed, join_2d_array_into_str(split_according_to_quotes(sp[i])));
+			i++;
+		}
+		print_2d_array(parsed, 1);
 		free_2d_array(sp);
 		sp = NULL;
-		/* free_2d_array(parsed); */
-		/* parsed = init_2d_array(); */
-		/* i = 0; */
+		free_2d_array(parsed);
+		parsed = init_2d_array();
+		i = 0;
 	}
 }
