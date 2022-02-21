@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 19:40:26 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/16 23:44:33 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/18 16:35:05 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	print_2d_array(char **array, int fd)
 
 	i = 0;
 	if (array != NULL)
+	{
 		while (array[i])
 		{
 			ft_putstr_fd(array[i++], fd);
 			ft_putstr_fd("\n", fd);
 		}
+	}
 }
 
 size_t	size_of_2d_array(char **array)

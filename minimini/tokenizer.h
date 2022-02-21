@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 19:54:41 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/18 16:35:48 by orahmoun         ###   ########.fr       */
+/*   Created: 2022/02/20 23:05:23 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/02/21 00:15:20 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "main.h"
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
+# include "main.h"
 
-char	**ft_unset(char **env, char *variable)
+typedef struct s_token
 {
-	size_t	index;
+	char	*elem;
+	int		type;
+}	t_token;
 
-	index = find_in_2d_array(env, variable);
-	if (index == -1)
-		return (NULL);
-	return (delete_element_2d_array(env, index));
-}
+enum e_token_types {d_in, d_out, out, in, assignment, word, io_file, delimiter};
+
+void	print_tokens(t_list *tok_list);
+void	re_print_command(t_list	*tok_list);
+void	tokenizer(t_list **head, char *line);
+#endif

@@ -6,11 +6,35 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 10:44:08 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/17 11:46:33 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/19 21:33:29 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+static bool	check_unfulfilled_pipes(char *rl)
+{
+	int	i;
+
+	i = 0;
+	skip_char(rl, &i, ' ');
+	if (rl[i] == '|')
+		return (true);
+	while (rl[i])
+	{
+		if (rl[i] == '\'' || rl[i] == '\"')
+			skip_char(rl, &i, rl[++i - 1]);
+		if (rl[i] == '|')
+		{
+			++i;
+			skip_char(rl, &i, ' ');
+			if (rl[i] == '\0' || rl[i] == '|')
+				return (true);
+		}
+		i++;
+	}
+	return (false);
+}
 
 static bool	check_unclosed_quotes(char *read_line)
 {
@@ -78,9 +102,14 @@ bool	check_errors(char *rl)
 		write (2, "MiniShell : unclosed Quotes\n", 28);
 		return (true);
 	}
+	if (check_unfulfilled_pipes(rl))
+	{
+		write (2, "MiniShell : unfulfilled pipes\n", 30);
+		return (true);
+	}
 	if (check_unfulfilled_redirection(rl))
 	{
-		write (2, "MiniShell : Redirection unfulfilled\n", 36);
+		write (2, "MiniShell : unfulfilled redirection\n", 35);
 		return (true);
 	}
 	return (false);

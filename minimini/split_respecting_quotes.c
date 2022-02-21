@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:50:16 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/17 17:50:40 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:03:43 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	**spilt_respecting_quotes(char *str, char c)
 {
 	char	**splited_rd;
-	char	quote;
 	int		i;
 	int		j;
 
@@ -25,16 +24,12 @@ char	**spilt_respecting_quotes(char *str, char c)
 	splited_rd = init_2d_array();
 	while (str[i])
 	{
-		if (skip_char(str, &i, c) == -1)
-			break ;
+		skip_char(str, &i, c);
 		j = i;
 		while (str[i] && str[i] != c)
 		{
 			if (str[i] == '\'' || str[i] == '\"')
-			{
-				quote = str[i++];
-				skip_until_char(str, &i, quote);
-			}
+				skip_until_char(str, &i, str[++i - 1]);
 			i++;
 		}
 		splited_rd = add_element_2d_array_last(splited_rd,

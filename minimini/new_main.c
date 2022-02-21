@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   new_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 19:54:41 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/18 16:35:48 by orahmoun         ###   ########.fr       */
+/*   Created: 2022/02/20 22:53:25 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/02/21 00:19:13 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "main.h"
 
-char	**ft_unset(char **env, char *variable)
+#include "tokenizer.h"
+
+int main(void)
 {
-	size_t	index;
+	t_list	*tok_list;
+	char	*line;
 
-	index = find_in_2d_array(env, variable);
-	if (index == -1)
-		return (NULL);
-	return (delete_element_2d_array(env, index));
+	tok_list = NULL;
+	while (1)
+	{
+		line = readline("> ");
+		add_history(line);
+		tokenizer(&tok_list, line);
+		print_tokens(tok_list);
+		re_print_command(tok_list);
+		line = NULL;
+		tok_list = NULL;
+	}
 }

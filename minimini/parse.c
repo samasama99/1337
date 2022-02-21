@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/18 16:36:17 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/02/18 16:47:02 by orahmoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 char	**parse_redirection(char **section_string, t_section *section_struct)
@@ -25,7 +37,7 @@ char	**parse_redirection(char **section_string, t_section *section_struct)
 			section_struct->infile = section_string[++i];
 		}
 		else
-			args = add_element_2d_array_last(args, section_string[i]);	
+			args = add_element_2d_array_last(args, section_string[i]);
 		++i;
 	}
 	free (section_string);
@@ -61,12 +73,12 @@ static t_list	*extract_commands(char **splited_input)
 	if (section_string == NULL)
 		return (NULL);
 	head = ft_lstnew(create_section_struct(section_string));
-	while(splited_input[i] != NULL)
+	while (splited_input[i] != NULL)
 	{
 		section_string = scanner(splited_input[i]);
 		if (section_string == NULL)
 			return (NULL);
-		tmp =  create_section_struct(section_string);
+		tmp = create_section_struct(section_string);
 		if (tmp == NULL)
 			return (NULL);
 		section_string = NULL;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/18 16:49:06 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/02/18 16:50:01 by orahmoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdio.h>
@@ -46,6 +58,7 @@ char	*get_variable_env(char **env, char *variable);
 
 /******* PARSING TOOLS *****/
 
+char	*replace_variable_with_value(char **env, char *str);
 bool	check_errors(char *rl);
 char	**return_args_after_removing_quotes(char *rl);
 char	**spilt_respecting_quotes(char *str, char c);

@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 16:21:52 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/11 19:45:20 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/18 16:35:15 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ int	find_in_env(char **env, char *variable)
 	free(var);
 	return (index);
 }
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/18 16:35:51 by orahmoun          #+#    #+#             */
+/*   Updated: 2022/02/18 21:54:53 by orahmoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 void	print_parsed_data(t_list *data)
@@ -46,26 +58,21 @@ void	free_parsed_data(t_list *data)
 	i = 0;
 	if (data == NULL)
 		return ;
-	tmp = data;
-	while (data)
-	{
-		section = data->content;	
-		free_2d_array_elem(section->args);
-		free(section->args - 1);
-		free (section->command);
-		free (section->infile);
-		free (section->outfile);
-		free (section);
-		data = data->next;
-	}
-	data = tmp;
 	while (data)
 	{
 		tmp = data;
+		section = data->content;	
+		free_2d_array_elem(section->args);
+		free(section->args - 1);
+		free(section->command);
+		free(section->infile);
+		free(section->outfile);
+		free(section);
 		data = data->next;
 		free(tmp);
 	}
 }
+
 int main(int n, char **args, char **env)
 {
 	char		*rl;
@@ -78,7 +85,7 @@ int main(int n, char **args, char **env)
 	while (1)
 	{
 		rl = readline(prompt);
-		if (*rl != '\0' || check_errors(rl) == false)
+		if (*rl != '\0' && check_errors(rl) == false)
 			add_history(rl);
 		else
 		{

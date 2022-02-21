@@ -6,7 +6,7 @@
 /*   By: orahmoun <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 17:43:25 by orahmoun          #+#    #+#             */
-/*   Updated: 2022/02/17 17:45:48 by orahmoun         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:48:10 by orahmoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "main.h"
@@ -16,9 +16,12 @@ char	*str_replace(char	*s, char *f, char *r)
 	char	*start;
 	char	*end;
 	char	*rest;
+	char	*tmp;
 
 	start = NULL;
 	end = NULL;
+	rest = NULL;
+	tmp = NULL;
 	if (!s || !f || !r || *f == 0|| *r == 0)
 		return (NULL);
 	if (ft_strncmp(s, f, ft_strlen(f)) == 0 && ft_strlen(f) == ft_strlen(s))
@@ -32,15 +35,25 @@ char	*str_replace(char	*s, char *f, char *r)
 	if (start && end && *start && *end)
 	{
 		rest = ft_strjoin(start, r);
+		tmp = rest;
 		rest = ft_strjoin(rest, end);
+		free(tmp);
 		free(start);
 		free(end);
 		return (rest);
 	}
 	else if (start && *start)
-		return ft_strjoin(start, rest);
+	{
+		tmp = ft_strjoin(start, r);
+		free(start);
+		return tmp; 
+	}
 	else if (end && *end)
-		return (ft_strjoin(rest, end));
+	{
+		tmp = ft_strjoin(r, end);
+		free(end);
+		return (tmp);
+	}
 	return (NULL);
 }
 
